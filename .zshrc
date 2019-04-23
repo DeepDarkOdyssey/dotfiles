@@ -1,8 +1,7 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-
-export PATH=/home/data_normal/focus/anaconda3/envs/python35/bin:$PATH
+export PATH=$PATH:/home/data_normal/focus/anaconda3/bin
 # Path to your oh-my-zsh installation.
 export ZSH=/home/focus/.oh-my-zsh
 
@@ -105,6 +104,8 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 export CUDA_HOME=:/usr/local/cuda-9.0:/usr/local/cuda-9.0
 export LD_LIBRARY_PATH=:/usr/local/cuda-9.0/lib64
-export PATH=/home/data_normal/focus/anaconda3/envs/python35/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/local/cuda-9.0/bin
+export PATH=$PATH:/usr/local/cuda-9.0/bin
 export CUDA_HOME=:/usr/local/cuda-9.0:/usr/local/cuda-9.0:/usr/local/cuda-9.0
 export PATH=$PATH:/home/data_normal/focus/code-server-1.31.1-100-linux-x64  
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

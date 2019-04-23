@@ -1,14 +1,19 @@
 " ############## vim-plug Settings ##############
 call plug#begin()
 Plug 'itchyny/lightline.vim'
+Plug 'itchyny/vim-cursorword'
 Plug 'morhetz/gruvbox'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'mhartington/oceanic-next'
 Plug 'maxbrunsfeld/vim-yankstack'
 Plug 'jiangmiao/auto-pairs'
 Plug 'easymotion/vim-easymotion'
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 Plug 'mhinz/vim-signify'
+Plug '~/.fzf'
+Plug 'junegunn/fzf.vim'
+
 
 call plug#end()
 
@@ -20,6 +25,12 @@ let g:AutoPairsShortcutToggle = '<M-a>'
 
 " Stop mapping <C-h> to <BS>
 let g:AutoPairsMapCh = 0
+
+" Set python3 for denite
+let g:python3_host_prog ='/home/data_normal/focus/anaconda3/bin/python3'
+
+" Map leader key to 'space'
+let mapleader=" "
 
 " ############## Coc Settings ##############
 " use <tab> for trigger completion and navigate to the next complete item
@@ -61,10 +72,35 @@ let g:lightline = {
       \ },
       \ }
 
+" Shortcut for opening CocCommands
+nnoremap <Leader>c :CocCommand<CR>
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+
+" ############## FZF Settings ##############
+nnoremap <Leader><TAB> :FZF<CR>
+nnoremap ; :Buffers<CR>
+nnoremap <Leader>ff :Lines<CR>
+nnoremap <C-h> :History<CR>
+
+" Jump to existed window if possible
+let g:fzf_buffers_jump = 1
+
+" Search for the word under cursor
+nnoremap <Leader>r :Lines '<C-R><C-W><CR>
+
 " ############## Basic Settings ##############
 " Set theme
 set background=dark
-colorscheme gruvbox
+syntax enable
+set t_Co=256
+set termguicolors
+colorscheme gruvbox 
 
 " Better default
 set shortmess=atOI " No help Uganda information, and overwrite read messages to avoid PRESS ENTER prompts
@@ -82,10 +118,9 @@ set splitbelow     " Puts new split windows to the bottom of the current
 set autowrite      " Automatically write a file when leaving a modified buffer
 set autoread       " Automatically read when a file is changed from outside 
 set mousehide      " Hide the mouse cursor while typing
-set t_Co=256       " Use 256 colors
 set ruler          " Show the ruler
 set showcmd        " Show partial commands in status line and Selected characters/lines in visual mode
-set showmode       " Show current mode in command-line
+set noshowmode     " Don't show current mode in command-line, lightline already done it
 set showmatch      " Show matching brackets/parentthesis
 set matchtime=5    " Show matching time
 set report=0       " Always report changed lines
@@ -96,11 +131,14 @@ set pumheight=20   " Avoid the pop up menu occupying the whole screen"
 set cursorline
 set cursorcolumn
 
+" Enabel folding
+set foldmethod=indent
+set foldlevel=99
+
 " Show the relative line numbers
 set number
 set relativenumber
 
-syntax enable
 
 " ############## Deep Shits ##############
  
@@ -129,14 +167,14 @@ set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
 
 " ############## Key Mappings ##############
 
-" Map leader key to 'space'
-let mapleader=" "
-
 " Source self
 nmap <leader>ss :so %<CR>
 
 " Fast saving
 nmap <leader>fs :w!<CR>
+
+" Turn off Highlights
+nnoremap <Leader>/ :nohl<CR>
 
 " Fast quiting
 nnoremap <silent> <leader>q :q<CR>
@@ -171,7 +209,6 @@ vnoremap H ^
 vnoremap L $
 vnoremap < <gv
 vnoremap > >gv
-
 
 " Normal mode shortcut
 nnoremap H ^
@@ -217,8 +254,21 @@ nnoremap <Leader>tN :tabnew<CR>
 nnoremap <Leader>to :tabonly<CR>
 nnoremap <Leader>tc :tabclose<CR>
 nnoremap <Leader>tm :tabmove<CR>
+nnoremap <Leader>th :tabfirst<CR>
+nnoremap <Leader>tl :tablast<CR>
 nnoremap <Leader>tn :tabnext<CR>
 nnoremap <Leader>tp :tabprev<CR>
+
+nnoremap <leader>1 1gt
+nnoremap <leader>2 2gt
+nnoremap <leader>3 3gt
+nnoremap <leader>4 4gt
+nnoremap <leader>5 5gt
+nnoremap <leader>6 6gt
+nnoremap <leader>7 7gt
+nnoremap <leader>8 8gt
+nnoremap <leader>9 9gt
+nnoremap <leader>0 :tablast<cr>
 
 "  Move a line of text using ALT+[jk]
 nmap <M-j> mz:m+<cr>`z
